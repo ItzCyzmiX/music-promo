@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-    import { fly, scale } from 'svelte/transition';
+  import { fly, scale } from 'svelte/transition';
   
   // State using Svelte 5 runes
   let selectedAlbum = $state(null);
@@ -10,115 +10,8 @@
 
   
   // Sample album data
-  const albums = {
-    'midnight-echoes': {
-      id: 'midnight-echoes',
-      title: 'Midnight Echoes',
-      year: '2024',
-      type: 'Album',
-      trackCount: 10,
-      duration: '42 min',
-      tracks: [
-        { number: 1, title: 'Intro (Midnight)', duration: '2:15' },
-        { number: 2, title: 'Echoes in the Dark', duration: '4:32' },
-        { number: 3, title: 'Neon Lights', duration: '3:45' },
-        { number: 4, title: 'City Sleep', duration: '5:12' },
-        { number: 5, title: 'Digital Dreams', duration: '4:18' },
-        { number: 6, title: 'Midnight Train', duration: '3:56' },
-        { number: 7, title: 'Lost in Translation', duration: '4:42' },
-        { number: 8, title: 'Binary Hearts', duration: '3:28' },
-        { number: 9, title: 'Outro (Dawn)', duration: '2:55' },
-        { number: 10, title: 'Echoes (Reprise)', duration: '6:34' }
-      ]
-    },
-    'neon-dreams': {
-      id: 'neon-dreams',
-      title: 'Neon Dreams',
-      year: '2023',
-      type: 'Album',
-      trackCount: 8,
-      duration: '35 min',
-      tracks: [
-        { number: 1, title: 'Electric Pulse', duration: '4:12' },
-        { number: 2, title: 'Neon Dreams', duration: '3:47' },
-        { number: 3, title: 'Synthetic Love', duration: '4:33' },
-        { number: 4, title: 'Circuit Board', duration: '3:21' },
-        { number: 5, title: 'Digital Horizon', duration: '5:15' },
-        { number: 6, title: 'Cyber Romance', duration: '4:01' },
-        { number: 7, title: 'Matrix Rain', duration: '3:38' },
-        { number: 8, title: 'Neon Nights', duration: '6:22' }
-      ]
-    },
-    'urban-symphony': {
-      id: 'urban-symphony',
-      title: 'Urban Symphony',
-      year: '2022',
-      type: 'EP',
-      trackCount: 5,
-      duration: '22 min',
-      tracks: [
-        { number: 1, title: 'Urban Jungle', duration: '4:45' },
-        { number: 2, title: 'Street Lights', duration: '3:52' },
-        { number: 3, title: 'Metropolitan', duration: '4:18' },
-        { number: 4, title: 'City Rhythm', duration: '3:34' },
-        { number: 5, title: 'Concrete Dreams', duration: '5:28' }
-      ]
-    },
-    'midnight-dechoes': {
-      id: 'midnight-echoes',
-      title: 'Midnight Echoes',
-      year: '2024',
-      type: 'Album',
-      trackCount: 10,
-      duration: '42 min',
-      tracks: [
-        { number: 1, title: 'Intro (Midnight)', duration: '2:15' },
-        { number: 2, title: 'Echoes in the Dark', duration: '4:32' },
-        { number: 3, title: 'Neon Lights', duration: '3:45' },
-        { number: 4, title: 'City Sleep', duration: '5:12' },
-        { number: 5, title: 'Digital Dreams', duration: '4:18' },
-        { number: 6, title: 'Midnight Train', duration: '3:56' },
-        { number: 7, title: 'Lost in Translation', duration: '4:42' },
-        { number: 8, title: 'Binary Hearts', duration: '3:28' },
-        { number: 9, title: 'Outro (Dawn)', duration: '2:55' },
-        { number: 10, title: 'Echoes (Reprise)', duration: '6:34' }
-      ]
-    },
-    'neon-dredams': {
-      id: 'neon-dreams',
-      title: 'Neon Dreams',
-      year: '2023',
-      type: 'Album',
-      trackCount: 8,
-      duration: '35 min',
-      tracks: [
-        { number: 1, title: 'Electric Pulse', duration: '4:12' },
-        { number: 2, title: 'Neon Dreams', duration: '3:47' },
-        { number: 3, title: 'Synthetic Love', duration: '4:33' },
-        { number: 4, title: 'Circuit Board', duration: '3:21' },
-        { number: 5, title: 'Digital Horizon', duration: '5:15' },
-        { number: 6, title: 'Cyber Romance', duration: '4:01' },
-        { number: 7, title: 'Matrix Rain', duration: '3:38' },
-        { number: 8, title: 'Neon Nights', duration: '6:22' }
-      ]
-    },
-    'urban-sddymphony': {
-      id: 'urban-symphony',
-      title: 'Urban Symphony',
-      year: '2022',
-      type: 'EP',
-      trackCount: 5,
-      duration: '22 min',
-      tracks: [
-        { number: 1, title: 'Urban Jungle', duration: '4:45' },
-        { number: 2, title: 'Street Lights', duration: '3:52' },
-        { number: 3, title: 'Metropolitan', duration: '4:18' },
-        { number: 4, title: 'City Rhythm', duration: '3:34' },
-        { number: 5, title: 'Concrete Dreams', duration: '5:28' }
-      ]
-    }
-  };
-
+  let { data } = $props();
+  let albums = $state([])
   function showAlbum(albumId) {
     selectedAlbum = albums[albumId];
   }
@@ -135,12 +28,30 @@
   }
 
   onMount( async() => {
-    loaded = true;
+    setTimeout(() => {
+
+        loaded = true;
+    }, 300)
+    albums = data.albums
   });
 </script>
 
 <main class="bg-vercel-bg text-vercel-text min-h-screen">
   <!-- Navigation -->
+  {#if !loaded}
+    <div class="fixed inset-0 bg-vercel-bg z-50 flex items-center justify-center" transition:fly={{ duration: 500, y: -50 }}>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-vercel-accent mb-4 animate-pulse">
+          CyzmiX
+        </div>
+        <div class="flex space-x-2 justify-center">
+          <div class="w-2 h-2 bg-vercel-accent rounded-full animate-bounce" style="animation-delay: 0s"></div>
+          <div class="w-2 h-2 bg-vercel-accent rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+          <div class="w-2 h-2 bg-vercel-accent rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+        </div>
+      </div>
+    </div>
+  {/if}
   <nav class="border-b border-vercel-border sticky top-0 bg-vercel-bg/95 backdrop-blur-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
@@ -189,8 +100,9 @@
     
     <!-- Content with z-index to appear above grid -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" transition:fly={{ y: 50, duration: 500 }}>
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 text-vercel-accent">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 text-vercel-accent relative inline-block">
         Hello!
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-vercel-accent transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
       </h1>
       <p class="text-xl md:text-2xl text-vercel-muted mb-8 max-w-3xl mx-auto">
         Welcome to my musical heaven, it's not as good as it sounds
@@ -210,20 +122,18 @@
       {#if !selectedAlbum }
         <!-- Albums Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {#each Object.values(albums) as album, id}
-          {#if loaded}
-            <div class="album-card cursor-pointer" onclick={() => showAlbum(album.id)} transition:fly={{ y: 50, duration: 500, delay: id * 100 }}>
+            {#each albums as album, id}
+            {#if loaded} 
+            <div class="album-card cursor-pointer" onclick={() => showAlbum(id)} transition:fly={{ y: 50, duration: 500, delay: id * 150 }}>
               <div class="album-cover bg-vercel-card rounded-lg mb-4 flex items-center justify-center aspect-square hover:scale-103 hover:shadow-2xl transition-all duration-300">
-                <svg class="w-16 h-16 text-vercel-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                </svg>
+                <img src={album.cover_image} alt={album.name} class="w-full h-full object-cover rounded-lg" />
               </div>
-              <h3 class="text-xl font-bold mb-2 text-vercel-accent">{album.title}</h3>
-              <p class="text-vercel-muted mb-2">{album.year} • {album.type}</p>
-              <p class="text-sm text-vercel-muted">{album.trackCount} tracks • {album.duration}</p>
+              <h3 class="text-xl font-bold mb-2 text-vercel-accent">{album.name}</h3>
+              <p class="text-vercel-muted mb-2">{album.release_date} • {album.type}</p>
+              <p class="text-sm text-vercel-muted">{album.total_tracks} tracks </p>
             </div>
             {/if}
-          {/each}
+            {/each}
         </div>
       {:else}
         <!-- Album Detail View -->
@@ -238,24 +148,22 @@
                 </svg>
                 Back to Albums
               </button>
-              <div class="album-cover bg-vercel-card rounded-lg flex items-center justify-center mb-4 aspect-square">
-                <svg class="w-24 h-24 text-vercel-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-                </svg>
-              </div>
 
+                <div class="album-cover bg-vercel-card rounded-lg mb-4 flex items-center justify-center aspect-square hover:scale-103 hover:shadow-2xl transition-all duration-300">
+                <img src={selectedAlbum.cover_image} alt={selectedAlbum.name} class="w-full h-full object-cover rounded-lg" />
+              </div>
             </div>
             <div class="flex-1">
               <p class="text-vercel-muted mb-2">{selectedAlbum.type.toUpperCase()}</p>
-              <h2 class="text-4xl md:text-5xl font-bold mb-4 text-vercel-accent">{selectedAlbum.title}</h2>
-              <p class="text-vercel-muted mb-6">Artist Name • {selectedAlbum.year} • {selectedAlbum.type} • {selectedAlbum.trackCount} tracks</p>
+              <h2 class="text-4xl md:text-5xl font-bold mb-4 text-vercel-accent">{selectedAlbum.name}</h2>
+              <p class="text-vercel-muted mb-2">CyzmiX</p><p class="text-vercel-muted mb-6"> {new Date(selectedAlbum.release_date).getFullYear()}  • {selectedAlbum.total_tracks} tracks</p>
               <div class="flex items-center gap-4 mb-8">
-                <button class="cursor-pointer bg-vercel-accent text-vercel-bg px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
+                <a href={"https://open.spotify.com/intl-fr/album/" + selectedAlbum.uri.split(':')[2]} target="_blank" class="cursor-pointer bg-vercel-accent text-vercel-bg px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors flex items-center gap-2">
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                   Play
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -271,21 +179,21 @@
             {#each selectedAlbum.tracks as track}
               <div class="track-row grid grid-cols-12 gap-4 py-3 px-2 rounded-lg cursor-pointer group hover:bg-white/5 transition-colors">
                 <div class="col-span-1 flex items-center">
-                  <span class="track-number text-vercel-muted group-hover:opacity-0 transition-opacity">{track.number}</span>
-                  <button class="play-button w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity absolute">
+                  <span class="track-number text-vercel-muted group-hover:opacity-0 transition-opacity">{track.track_number}</span>
+                  <a href={"https://open.spotify.com/intl-fr/track/" + track.uri.split(':')[2]}  target="_blank" class="play-button w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity absolute">
                     <svg class="w-4 h-4 text-vercel-accent" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z"/>
                     </svg>
-                  </button>
+                </a>
                 </div>
                 <div class="col-span-6 flex items-center">
-                  <span class="text-vercel-accent font-medium">{track.title}</span>
+                  <span class="text-vercel-accent font-medium">{track.name}</span>
                 </div>
                 <div class="col-span-3 hidden md:flex items-center">
-                  <span class="text-vercel-muted">{selectedAlbum.title}</span>
+                  <span class="text-vercel-muted">{selectedAlbum.name}</span>
                 </div>
                 <div class="col-span-2 flex items-center justify-end">
-                  <span class="text-vercel-muted">{track.duration}</span>
+                  <span class="text-vercel-muted">{Math.ceil(track.duration).toString()[0] + ":" + (track.duration).toString()[1] + (track.duration).toString()[2]}</span>
                 </div>
               </div>
             {/each}
@@ -309,7 +217,7 @@
             <div class="text-vercel-muted">Monthly Listeners</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-bold text-vercel-accent mb-2">12</div>
+            <div class="text-2xl font-bold text-vercel-accent mb-2">{albums.length}</div>
             <div class="text-vercel-muted">Albums Released</div>
           </div>
           <div class="text-center">
@@ -411,4 +319,29 @@
   .track-number {
     transition: opacity 0.3s ease;
   }
+  @keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
 </style>
