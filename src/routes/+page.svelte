@@ -238,10 +238,10 @@
           if u wanna collab, or just to say hello.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:itzmedigamingx@gmail.com" class="bg-vercel-accent text-vercel-bg px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+          <a href="mailto:itzmedigamingx@gmail.com" class="bg-vercel-accent text-vercel-bg px-8 py-3 rounded-lg font-semibold transition-colors">
             Email Me (itzmedigamingx@gmail.com)
           </a>
-          <a href="https://www.instagram.com/_cyzmix" class="border border-vercel-border px-8 py-3 rounded-lg font-semibold hover:bg-vercel-card transition-colors">
+          <a href="https://www.instagram.com/_cyzmix" target="_blank" class="border border-vercel-border px-8 py-3 rounded-lg font-semibold hover:bg-vercel-card transition-colors">
             My Insta
           </a>
         </div>
