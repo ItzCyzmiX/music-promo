@@ -230,7 +230,7 @@
   </section>
 
   <!-- Contact Section -->
-  <!-- <section id="contact" class="py-20">
+  <section id="contact" class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6 text-vercel-accent">Get in Touch</h2>
@@ -238,16 +238,16 @@
           if u wanna collab, or just to say hello.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="mailto:contact@artist.com" class="bg-vercel-accent text-vercel-bg px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
-            Email Me
+          <a href="mailto:itzmedigamingx@gmail.com" class="bg-vercel-accent text-vercel-bg px-8 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors">
+            Email Me (itzmedigamingx@gmail.com)
           </a>
-          <a href="#" class="border border-vercel-border px-8 py-3 rounded-lg font-semibold hover:bg-vercel-card transition-colors">
-            Social Media
+          <a href="https://www.instagram.com/_cyzmix" class="border border-vercel-border px-8 py-3 rounded-lg font-semibold hover:bg-vercel-card transition-colors">
+            My Insta
           </a>
         </div>
       </div>
     </div>
-  </section> -->
+  </section> 
 
   <!-- Footer -->
   <footer class="border-t border-vercel-border py-12">
